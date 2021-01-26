@@ -14,3 +14,6 @@ The base index data points are as follows, every point is using a range from **1
 - **Screen Quality** - This data point contains if the screen is damaged or has any other problems, one example would be dead pixels. The best case scenario is there are no problems and the screen is perfectly fine.
 - **State** - Likewise the other problems and other conditions of the laptop are fit within this one data point where we will express any problems with the laptop or issues, an example would be a dead key, this wouldn't range high but would pose a problem for the buyer if it can not be replaced, sometimes making it unusable.
 
+## Design Proposal
+
+- [Design](https://www.figma.com/file/h1yFFQpggoZzxZ4cm8ujc2/Design?node-id=0%3A1)
