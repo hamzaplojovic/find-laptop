@@ -16,7 +16,7 @@ def add_command():
 # Main window
 root = tkinter.Tk()
 root.title("Laptop Finder")
-root.geometry("800x800")
+root.geometry("480x500")
 #======================================================
 # Link
 link_button = Button(root, text="Link", width=10, height=2)
