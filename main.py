@@ -32,9 +32,7 @@ def add_command():
               "state": state.get()}
 
 
-    index = calculate_index(values)
-    values['index'] = index
-    db_add(values)
+  
 
     print(values)
 #=======================================================
