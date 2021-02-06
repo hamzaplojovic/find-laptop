@@ -1,5 +1,16 @@
 import tkinter
 from tkinter import *
+from pymongo import MongoClient
+
+client = MongoClient('localhost', 27017)
+
+db = client['mydb']
+
+collection = db['Laptops']
+
+
+def open_new_window():
+    pass
 
 row = 1 
 def create_row(text):
@@ -10,11 +21,13 @@ def create_row(text):
     link_entry = Entry(root, width=40, bg="#EEEEEE", bd=3, font=("Calibri", 12))
     link_entry.grid(row=row, column=1, ipady=5)
     row += 1
-
     return link_entry
+
+
 
 def calculate_index():
     pass
+
 def db_values():
     pass
 
@@ -22,19 +35,21 @@ def db_values():
 def add_command():
 
     
-    values = {"link": link.get(),
-              "price": price.get(),
-              "cpu":   cpu.get(),
-              "battery": battery.get(),
-              "ram": ram.get(),
-              "screen quality": sq.get(),
-              "screen resolution": sr.get(),
-              "state": state.get()}
+    values = {
+                "link": link.get(),
+                "price": int(price.get()),
+                "cpu":   cpu.get(),
+                "efficiency" : int(efficiency.get())
+              }
 
 
-  
+#   "battery": battery.get(),
+#               "ram": ram.get(),
+#               "screen quality": sq.get(),
+#               "screen resolution": sr.get(),
+#               "state": state.get()
 
-    print(values)
+    collection.insert_one(values)
 #=======================================================
 
 # Main window
@@ -45,18 +60,20 @@ root.geometry("480x500")
 #======================================================
 
 #Button Add
-add = Button(root, text="Add", width=5, command=add_command)
-add.grid(row=9, column=2, padx=0, pady=10)
+add = Button(root, text="Add", width=5, command=add_command)    #add_command
+add.grid(row=9, column=0, padx=0, pady=20)
+
+#=======================================================
+
+move_button = Button(root, text="Move", width=5)
+move_button.grid(row=9, column=2, padx=0, pady=20)
 
 #=======================================================
 
 link = create_row("Link")
+efficiency = create_row("Efficiency")
 price = create_row("Price")
 cpu = create_row("CPU")
-battery = create_row("Battery")
-ram = create_row("RAM")
-sq = create_row("Screen Q.")
-sr = create_row("Screen R.")
-state = create_row("State")
+
 
 root.mainloop()
