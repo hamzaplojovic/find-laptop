@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from pymongo import MongoClient
+import csv
 
 client = MongoClient('localhost', 27017)
 
@@ -8,9 +9,19 @@ db = client['mydb']
 
 collection = db['Laptops']
 
+def get_data():
+    data = {}
+    f = open('cpu.csv')
+    reader = csv.reader(f)
+    for x in reader:
+        data[x[3].lower()] = x[5]
+    return data
 
-def open_new_window():
-    pass
+    f.close()
+
+
+def move_command():
+    import ispis
 
 row = 1 
 def create_row(text):
@@ -37,9 +48,9 @@ def add_command():
     
     values = {
                 "link": link.get(),
-                "price": int(price.get()),
+                "price": price.get(),
                 "cpu":   cpu.get(),
-                "efficiency" : int(efficiency.get())
+                "efficiency" : efficiency.get()
               }
 
 
@@ -50,12 +61,16 @@ def add_command():
 #               "state": state.get()
 
     collection.insert_one(values)
+
 #=======================================================
 
 # Main window
 root = tkinter.Tk()
 root.title("Laptop Finder")
 root.geometry("480x500")
+
+
+
 
 #======================================================
 
@@ -65,7 +80,7 @@ add.grid(row=9, column=0, padx=0, pady=20)
 
 #=======================================================
 
-move_button = Button(root, text="Move", width=5)
+move_button = Button(root, text="Reader", width=5, command=move_command)
 move_button.grid(row=9, column=2, padx=0, pady=20)
 
 #=======================================================
@@ -75,5 +90,12 @@ efficiency = create_row("Efficiency")
 price = create_row("Price")
 cpu = create_row("CPU")
 
+def button_click():
+    efficiency.delete(0, END)
+    efficiency.insert(0, data.get((cpu.get().lower()), "Error"))
+
+data = get_data()
+button = Button(root, text="CPU Search", command=button_click)
+button.grid(row=9, column=1)
 
 root.mainloop()
