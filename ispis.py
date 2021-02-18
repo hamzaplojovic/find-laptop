@@ -13,7 +13,7 @@ def create_db_labels():
     
     root.title('Laptop Finder')
 
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongodb+srv://admin:iphsgJHapeNdSWYR@cluster0.nteyj.mongodb.net', 27017)
     db = client['mydb']
     collection = db['Laptops']
 
